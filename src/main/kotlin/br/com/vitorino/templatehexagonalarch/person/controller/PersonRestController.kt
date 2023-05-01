@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("person")
+@RequestMapping("/person")
 @Validated
 class PersonRestController(private val mapper: PersonMapper,
                         private val commandProcessor: PersonCreateCommandProcessor
