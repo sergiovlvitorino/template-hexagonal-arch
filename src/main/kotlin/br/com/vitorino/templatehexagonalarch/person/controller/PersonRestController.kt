@@ -28,7 +28,7 @@ class PersonRestController(private val mapper: PersonMapper,
 
                 val result = commandProcessor.execute(person)
 
-                var response = mapper.mapToResponse(result)
+                val response = mapper.mapToResponse(result)
 
                 log.info("Retornando Response {}", response)
 
