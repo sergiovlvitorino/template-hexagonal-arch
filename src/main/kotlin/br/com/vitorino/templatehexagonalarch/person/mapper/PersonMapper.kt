@@ -5,6 +5,7 @@ import br.com.vitorino.templatehexagonalarch.person.controller.PersonResponse
 import br.com.vitorino.templatehexagonalarch.person.message.PersonMessage
 import br.com.vitorino.templatehexagonalarch.person.model.Person
 import br.com.vitorino.templatehexagonalarch.person.repository.PersonEntity
+import br.com.vitorino.templatehexagonalarch.person.service.PersonBannedRequest
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 
@@ -63,6 +64,16 @@ class PersonMapper {
         log.info("Convertendo Model {} para Message {}", person, message)
 
         return message
+    }
+
+    fun mapToRequest(person: Person): PersonBannedRequest {
+
+        val request = PersonBannedRequest()
+        request.email = person.email
+
+        log.info("Convertendo Model {} para Request {}", person, request)
+
+        return request
     }
 
 }

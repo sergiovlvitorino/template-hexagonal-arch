@@ -4,16 +4,19 @@ import br.com.vitorino.templatehexagonalarch.infrastructure.command.CommandProce
 import br.com.vitorino.templatehexagonalarch.person.message.PersonCreatedHubProducer
 import br.com.vitorino.templatehexagonalarch.person.model.Person
 import br.com.vitorino.templatehexagonalarch.person.repository.PersonRepo
+import br.com.vitorino.templatehexagonalarch.person.validator.PersonBannedValidator
 import br.com.vitorino.templatehexagonalarch.person.validator.PersonUniqueEmailValidator
 import br.com.vitorino.templatehexagonalarch.person.visitor.PersonGenerateIdVisitor
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 
 @Component
-class PersonCreateCommandProcessor(private val personUniqueEmailValidator: PersonUniqueEmailValidator,
-                                   private val personGenerateIdVisitor: PersonGenerateIdVisitor,
-                                   private val personRepo: PersonRepo,
-                                   private val personCreatedHubProducer: PersonCreatedHubProducer,
+class PersonCreateCommandProcessor(
+        private val personUniqueEmailValidator: PersonUniqueEmailValidator,
+        private val personBannedValidator: PersonBannedValidator,
+        private val personGenerateIdVisitor: PersonGenerateIdVisitor,
+        private val personRepo: PersonRepo,
+        private val personCreatedHubProducer: PersonCreatedHubProducer,
 ) : CommandProcessor<Person, Person> {
 
     private val log = LoggerFactory.getLogger(this::class.java)
@@ -22,6 +25,8 @@ class PersonCreateCommandProcessor(private val personUniqueEmailValidator: Perso
         log.info("Iniciando o processamento {}", person)
 
         personUniqueEmailValidator.validate(person)
+
+        personBannedValidator.validate(person)
 
         person.accept(personGenerateIdVisitor)
 
