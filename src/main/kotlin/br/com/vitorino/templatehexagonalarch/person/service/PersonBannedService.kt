@@ -6,7 +6,7 @@ import br.com.vitorino.templatehexagonalarch.person.model.Person
 import org.slf4j.LoggerFactory
 
 @org.springframework.stereotype.Service
-class PersonBannedService(private val mapper: PersonMapper):Service<Person,Boolean> {
+class PersonBannedService(private val mapper: PersonMapper) : Service<Person, Boolean> {
 
     private val log = LoggerFactory.getLogger(this::class.java)
 

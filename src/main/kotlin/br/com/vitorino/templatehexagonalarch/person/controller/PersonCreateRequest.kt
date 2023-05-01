@@ -8,12 +8,12 @@ class PersonCreateRequest {
 
     @JsonAlias("name")
     @NotEmpty
-    lateinit var name:String
+    lateinit var name: String
 
     @JsonAlias("email")
     @NotEmpty
     @Email
-    lateinit var email:String
+    lateinit var email: String
 
 
 }

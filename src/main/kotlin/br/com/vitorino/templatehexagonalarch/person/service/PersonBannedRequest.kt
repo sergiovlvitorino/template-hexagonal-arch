@@ -5,6 +5,6 @@ import com.fasterxml.jackson.annotation.JsonAlias
 class PersonBannedRequest {
 
     @JsonAlias("email")
-    lateinit var email:String
+    lateinit var email: String
 
 }

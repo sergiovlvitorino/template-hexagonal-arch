@@ -7,7 +7,7 @@ import br.com.vitorino.templatehexagonalarch.person.service.PersonBannedService
 import org.springframework.stereotype.Component
 
 @Component
-class PersonBannedValidator(private val personBannedService: PersonBannedService):Validator<Person> {
+class PersonBannedValidator(private val personBannedService: PersonBannedService) : Validator<Person> {
     override fun validate(person: Person) {
         personBannedService.call(person).takeIf { it }.apply {
             throw PersonBannedException("Person is banned")

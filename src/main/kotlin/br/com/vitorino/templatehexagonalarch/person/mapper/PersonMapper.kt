@@ -14,7 +14,7 @@ class PersonMapper {
 
     private val log = LoggerFactory.getLogger(this::class.java)
 
-    fun mapToEntity(person: Person): PersonEntity{
+    fun mapToEntity(person: Person): PersonEntity {
         val entity = PersonEntity()
         entity.id = person.id
         entity.name = person.name

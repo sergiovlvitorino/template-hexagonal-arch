@@ -14,25 +14,25 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/person")
 @Validated
 class PersonRestController(private val mapper: PersonMapper,
-                        private val commandProcessor: PersonCreateCommandProcessor
-        ) {
+                           private val commandProcessor: PersonCreateCommandProcessor
+) {
 
-        private val log = LoggerFactory.getLogger(this::class.java)
+    private val log = LoggerFactory.getLogger(this::class.java)
 
-        @PostMapping
-        fun create(@RequestBody @Valid request: PersonCreateRequest): PersonResponse {
+    @PostMapping
+    fun create(@RequestBody @Valid request: PersonCreateRequest): PersonResponse {
 
-                log.info("Requisicao recebida {}", request)
+        log.info("Requisicao recebida {}", request)
 
-                val person = mapper.mapToModel(request)
+        val person = mapper.mapToModel(request)
 
-                val result = commandProcessor.execute(person)
+        val result = commandProcessor.execute(person)
 
-                val response = mapper.mapToResponse(result)
+        val response = mapper.mapToResponse(result)
 
-                log.info("Retornando Response {}", response)
+        log.info("Retornando Response {}", response)
 
-                return response
-        }
+        return response
+    }
 
 }

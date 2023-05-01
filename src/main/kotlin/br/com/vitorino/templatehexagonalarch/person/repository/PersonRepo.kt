@@ -8,7 +8,7 @@ import java.util.UUID
 
 @Component
 class PersonRepo(private val mapper: PersonMapper,
-                 private val repository: PersonRepository): IPersonRepo<Person, String> {
+                 private val repository: PersonRepository) : IPersonRepo<Person, String> {
 
     private val log = LoggerFactory.getLogger(this::class.java)
 

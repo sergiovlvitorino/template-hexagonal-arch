@@ -9,5 +9,5 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy
 class Start
 
 fun main(args: Array<String>) {
-	runApplication<Start>(*args)
+    runApplication<Start>(*args)
 }

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component
 import java.util.UUID
 
 @Component
-class PersonGenerateIdVisitor:Visitor<Person> {
+class PersonGenerateIdVisitor : Visitor<Person> {
 
     private val log = LoggerFactory.getLogger(this::class.java)
 
