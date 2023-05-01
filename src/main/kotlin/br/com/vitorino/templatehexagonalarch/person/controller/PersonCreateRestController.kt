@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/person")
 @Validated
-class PersonRestController(private val mapper: PersonMapper,
-                           private val commandProcessor: PersonCreateCommandProcessor
+class PersonCreateRestController(private val mapper: PersonMapper,
+                                 private val commandProcessor: PersonCreateCommandProcessor
 ) {
 
     private val log = LoggerFactory.getLogger(this::class.java)
