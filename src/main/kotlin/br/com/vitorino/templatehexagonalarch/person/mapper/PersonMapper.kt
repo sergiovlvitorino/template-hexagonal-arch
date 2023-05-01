@@ -2,6 +2,7 @@ package br.com.vitorino.templatehexagonalarch.person.mapper
 
 import br.com.vitorino.templatehexagonalarch.person.controller.PersonCreateRequest
 import br.com.vitorino.templatehexagonalarch.person.controller.PersonResponse
+import br.com.vitorino.templatehexagonalarch.person.message.PersonMessage
 import br.com.vitorino.templatehexagonalarch.person.model.Person
 import br.com.vitorino.templatehexagonalarch.person.repository.PersonEntity
 import org.slf4j.LoggerFactory
@@ -53,6 +54,15 @@ class PersonMapper {
         log.info("Convertendo Model {} para Response {}", person, response)
 
         return response
+    }
+
+    fun mapToMessage(person: Person): PersonMessage {
+        val message = PersonMessage()
+        message.id = person.id
+
+        log.info("Convertendo Model {} para Message {}", person, message)
+
+        return message
     }
 
 }

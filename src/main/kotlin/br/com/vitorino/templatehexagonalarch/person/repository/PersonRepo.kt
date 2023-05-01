@@ -4,6 +4,7 @@ import br.com.vitorino.templatehexagonalarch.person.mapper.PersonMapper
 import br.com.vitorino.templatehexagonalarch.person.model.Person
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
+import java.util.UUID
 
 @Component
 class PersonRepo(private val mapper: PersonMapper,
@@ -14,6 +15,7 @@ class PersonRepo(private val mapper: PersonMapper,
     override fun save(person: Person): Person {
 
         var entity = mapper.mapToEntity(person)
+        entity.id = UUID.randomUUID().toString()
 
         runCatching {
             log.info("Salvando a Entity {}", entity)
