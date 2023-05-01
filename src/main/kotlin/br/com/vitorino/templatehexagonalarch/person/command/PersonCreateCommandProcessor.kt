@@ -4,15 +4,23 @@ import br.com.vitorino.templatehexagonalarch.infrastructure.command.CommandProce
 import br.com.vitorino.templatehexagonalarch.person.model.Person
 import br.com.vitorino.templatehexagonalarch.person.repository.PersonRepo
 import br.com.vitorino.templatehexagonalarch.person.validator.PersonUniqueEmailValidator
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 
 @Component
-class PersonCreateCommandProcessor(private val personUniqueEmailValidator: PersonUniqueEmailValidator
-                                    private val personRepo: PersonRepo
+class PersonCreateCommandProcessor(private val personUniqueEmailValidator: PersonUniqueEmailValidator,
+                                   private val personRepo: PersonRepo
 ) : CommandProcessor<Person, Person> {
+
+    private val log = LoggerFactory.getLogger(this::class.java)
+
     override fun execute(person: Person): Person {
+        log.info("Iniciando o processamento {}", person)
         personUniqueEmailValidator.validate(person)
 
-        TODO("Not yet implemented")
+
+        val result = personRepo.save(person)
+        log.info("Processamento concluido com sucesso {}", result)
+        return result
     }
 }
