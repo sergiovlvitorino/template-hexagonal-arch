@@ -22,12 +22,17 @@ class PersonRestController(private val mapper: PersonMapper,
         @PostMapping
         fun create(@RequestBody @Valid request: PersonCreateRequest): PersonResponse {
 
+                log.info("Requisicao recebida {}", request)
+
                 val person = mapper.mapToModel(request)
 
                 val result = commandProcessor.execute(person)
 
-                return mapper.mapToResponse(result)
+                var response = mapper.mapToResponse(result)
 
+                log.info("Retornando Response {}", response)
+
+                return response
         }
 
 }
