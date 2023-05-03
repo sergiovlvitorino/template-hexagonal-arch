@@ -1,6 +1,7 @@
 package br.com.vitorino.templatehexagonalarch.infrastructure.exception
 
 import org.slf4j.LoggerFactory
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
@@ -20,7 +21,7 @@ class CustomRestControllerAdvise(private val validationResult: ValidationResult)
     @ExceptionHandler
     fun handleNotFoundException(exception: NotFoundException): ResponseEntity<Any> {
         log.error("{}", exception)
-        return ResponseEntity.notFound().build()
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(String.format("{\"exception\":\"{}\"}", exception.message))
     }
 
     @ExceptionHandler

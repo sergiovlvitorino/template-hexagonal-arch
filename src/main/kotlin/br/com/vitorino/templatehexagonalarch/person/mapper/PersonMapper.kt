@@ -14,7 +14,7 @@ class PersonMapper {
 
     private val log = LoggerFactory.getLogger(this::class.java)
 
-    fun mapToEntity(person: Person): PersonEntity {
+    fun mapModelToEntity(person: Person): PersonEntity {
         val entity = PersonEntity()
         entity.id = person.id
         entity.name = person.name
@@ -25,7 +25,7 @@ class PersonMapper {
         return entity
     }
 
-    fun mapToModel(entity: PersonEntity): Person {
+    fun mapEntityToModel(entity: PersonEntity): Person {
         val model = Person()
         model.id = entity.id
         model.name = entity.name
@@ -36,7 +36,7 @@ class PersonMapper {
         return model
     }
 
-    fun mapToModel(request: PersonCreateRequest): Person {
+    fun mapCreateRequestToModel(request: PersonCreateRequest): Person {
         val model = Person()
         model.name = request.name
         model.email = request.email
@@ -46,7 +46,7 @@ class PersonMapper {
         return model
     }
 
-    fun mapToResponse(person: Person): PersonResponse {
+    fun mapModelToResponse(person: Person): PersonResponse {
         val response = PersonResponse()
         response.id = person.id
         response.name = person.name
@@ -57,7 +57,7 @@ class PersonMapper {
         return response
     }
 
-    fun mapToMessage(person: Person): PersonMessage {
+    fun mapModelToMessage(person: Person): PersonMessage {
         val message = PersonMessage()
         message.id = person.id
 
@@ -66,7 +66,7 @@ class PersonMapper {
         return message
     }
 
-    fun mapToRequest(person: Person): PersonBannedRequest {
+    fun mapModelToBannedRequest(person: Person): PersonBannedRequest {
 
         val request = PersonBannedRequest()
         request.email = person.email

@@ -12,9 +12,9 @@ class PersonBannedService(private val mapper: PersonMapper) : Service<Person, Bo
 
     override fun call(person: Person): Boolean {
 
-        val request = mapper.mapToRequest(person)
+        val bannedRequest = mapper.mapModelToBannedRequest(person)
 
-        log.info("Consumindo servico PersonBanned {}", request)
+        log.info("Consumindo servico PersonBanned {}", bannedRequest)
 
         // TODO
 

@@ -23,11 +23,11 @@ class PersonCreateRestController(private val mapper: PersonMapper,
 
         log.info("Requisicao recebida {}", request)
 
-        val person = mapper.mapToModel(request)
+        val person = mapper.mapCreateRequestToModel(request)
 
         val result = commandProcessor.execute(person)
 
-        val response = mapper.mapToResponse(result)
+        val response = mapper.mapModelToResponse(result)
 
         log.info("Retornando Response {}", response)
 

@@ -11,7 +11,7 @@ class PersonCreatedHubProducer(private val mapper: PersonMapper) : Producer<Pers
 
     private val log = LoggerFactory.getLogger(this::class.java)
     override fun publish(person: Person) {
-        val message = mapper.mapToMessage(person)
+        val message = mapper.mapModelToMessage(person)
         log.info("Enviando para topico PersonCreated {}", message)
         // TODO enviar para o topico
     }

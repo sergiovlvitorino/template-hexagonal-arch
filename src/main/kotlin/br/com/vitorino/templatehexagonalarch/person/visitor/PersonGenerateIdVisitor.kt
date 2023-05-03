@@ -12,8 +12,7 @@ class PersonGenerateIdVisitor : Visitor<Person> {
     private val log = LoggerFactory.getLogger(this::class.java)
 
     override fun visit(person: Person) {
-        val id = UUID.randomUUID().toString()
-        log.info("Adicionando id {} para person {}", id, person)
-        person.id = id
+        person.id = UUID.randomUUID().toString()
+        log.info("Adicionando Id para person {}", person)
     }
 }
