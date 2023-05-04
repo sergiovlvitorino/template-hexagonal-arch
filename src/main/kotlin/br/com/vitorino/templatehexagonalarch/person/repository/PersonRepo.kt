@@ -20,7 +20,6 @@ class PersonRepo(private val mapper: PersonMapper,
         runCatching {
             log.info("Salvando a Entity {}", entity)
             entity = repository.save(entity)
-        }.onSuccess {
             log.info("Entity salva com sucesso {}", entity)
         }.onFailure {
             log.error("Erro ao salvar a entity {} {}", entity, it)
@@ -36,15 +35,27 @@ class PersonRepo(private val mapper: PersonMapper,
 
     override fun findById(id: String): Optional<Person> {
         log.info("Buscando Person byId {}", id)
-        val optionalPersonEntity = repository.findById(id)
-        optionalPersonEntity.takeIf { it.isPresent }
-                .apply {
-                    val entity = optionalPersonEntity.get()
-                    log.info("Person byId {} obtida com sucesso {}", id, entity)
-                    return Optional.of(mapper.mapEntityToModel(entity))
-                }.run {
-                    log.info("Person byId {} nao encontrou a entidade", id)
-                    return Optional.empty()
-                }
+
+        var optionalPerson: Optional<Person> = Optional.empty()
+
+        runCatching {
+            repository.findById(id).takeIf { it.isPresent }
+                    .apply {
+                        val personEntity = requireNotNull(this).get()
+
+                        log.info("PersonEntity encontrada {} com id {}", personEntity, id)
+
+                        val person = mapper.mapEntityToModel(personEntity)
+
+                        optionalPerson = Optional.of(person)
+                    }.run {
+                        log.info("Person nao foi encontrada com id {}", id)
+                    }
+        }.onFailure {
+            log.error("Erro ao buscar Person com Id {} exception {}", id, it)
+            throw it
+        }
+
+        return optionalPerson
     }
 }
