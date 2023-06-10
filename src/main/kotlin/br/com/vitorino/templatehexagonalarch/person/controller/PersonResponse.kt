@@ -1,16 +1,17 @@
 package br.com.vitorino.templatehexagonalarch.person.controller
 
 import com.fasterxml.jackson.annotation.JsonAlias
+import com.fasterxml.jackson.annotation.JsonProperty
 
 class PersonResponse {
 
-    @JsonAlias("id")
+    @JsonProperty("id")
     lateinit var id: String
 
-    @JsonAlias("name")
+    @JsonProperty("name")
     lateinit var name: String
 
-    @JsonAlias("email")
+    @JsonProperty("email")
     lateinit var email: String
 
 }
